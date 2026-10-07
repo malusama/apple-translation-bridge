@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apple 本地翻译</title>
+<style>
+body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:48px auto;padding:0 24px;color:#222;background:#fafafa}h1{font-size:28px;margin-bottom:8px}p{color:#555}section{background:white;border:1px solid #ddd;border-radius:14px;padding:24px;margin:24px 0}textarea{box-sizing:border-box;width:100%;font:inherit;min-height:130px;padding:12px;border:1px solid #bbb;border-radius:8px}button{font:inherit;background:#1769c8;color:white;border:0;border-radius:8px;padding:8px 18px;cursor:pointer}button:disabled{opacity:.5;cursor:wait}code{word-break:break-all}#result{white-space:pre-wrap}#status{font-weight:600}label{display:block;margin-bottom:8px}small{color:#666}
+</style>
+<h1>Apple 本地翻译</h1><p>翻译在 Mac 本地完成，语言包就绪后可离线使用。</p>
+<section><div id="status">正在检查语言包…</div><div id="pairs"></div><p>沉浸式翻译 → 自定义接口：</p><code id="endpoint"></code></section>
+<section><label for="source">输入英文</label><textarea id="source">The translation runs entirely on your Mac, even when you are offline.</textarea><p><button id="translate">翻译成中文</button> <small>每一行作为一个独立段落</small></p><div id="result" aria-live="polite"></div><small id="elapsed"></small></section>
+<script>
+document.querySelector('#endpoint').textContent=location.origin+'/imme';
+async function refresh(){try{const h=await(await fetch('/health')).json();const pairs=Object.entries(h.language_pairs||{});document.querySelector('#status').textContent=h.ready?'本地翻译已就绪':pairs.some(([,v])=>v==='installed')?'部分语言已就绪':'语言包尚未就绪';document.querySelector('#pairs').textContent=pairs.map(([k,v])=>(k==='en->zh-CN'?'英文 → 中文':k==='ja->zh-CN'?'日文 → 中文':k)+'：'+(v==='installed'?'已下载':v==='supported'?'待下载':v)).join(' · ')}catch(e){document.querySelector('#status').textContent=e.message}}
+document.querySelector('#translate').onclick=async()=>{const button=document.querySelector('#translate');button.disabled=true;document.querySelector('#result').textContent='正在翻译…';document.querySelector('#elapsed').textContent='';try{const r=await fetch('/imme',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({source_lang:'auto',target_lang:'zh-CN',text_list:document.querySelector('#source').value.split('\n')})});const value=await r.json();if(!r.ok)throw Error(value.error?.message||'翻译失败');document.querySelector('#result').textContent=value.translations.map(t=>t.text).join('\n');document.querySelector('#elapsed').textContent='引擎耗时 '+value.elapsed_ms+' ms'}catch(e){document.querySelector('#result').textContent=e.message}finally{button.disabled=false}};
+refresh();
+</script></html>
