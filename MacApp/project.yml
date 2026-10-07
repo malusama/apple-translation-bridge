@@ -13,7 +13,7 @@ settings:
     ENABLE_HARDENED_RUNTIME: YES
     ENABLE_APP_SANDBOX: YES
     MARKETING_VERSION: "1.0.0"
-    CURRENT_PROJECT_VERSION: "3"
+    CURRENT_PROJECT_VERSION: "4"
 targets:
   LocalTranslateBridge:
     type: application
@@ -25,6 +25,10 @@ targets:
           - App.entitlements
           - Info.plist
           - LocalTranslateBridge.xcodeproj
+          - AppIcon.icon
+      - path: AppIcon.icon
+        type: file
+        buildPhase: resources
       - path: ../Sources/TranslationProcessor.swift
       - path: ../index.html
         buildPhase: resources

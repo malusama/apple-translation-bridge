@@ -1,9 +1,27 @@
 import AppKit
 import Foundation
 
-// Export the selected artwork at every macOS icon size with a clean tile edge.
+// Export the native Icon Composer document for legacy/static icon consumers.
 let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
-let source = root.appendingPathComponent("assets/app-icon-source.png")
+let selection = Process()
+selection.executableURL = URL(fileURLWithPath: "/usr/bin/xcode-select")
+selection.arguments = ["-p"]
+let output = Pipe(); selection.standardOutput = output
+try selection.run(); selection.waitUntilExit()
+let selected = String(decoding: output.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self)
+    .trimmingCharacters(in: .whitespacesAndNewlines)
+let developer = ProcessInfo.processInfo.environment["DEVELOPER_DIR"] ?? selected
+let tool = URL(fileURLWithPath: developer).deletingLastPathComponent()
+    .appendingPathComponent("Applications/Icon Composer.app/Contents/Executables/ictool")
+let source = root.appendingPathComponent("assets/liquid-glass/default.png")
+try FileManager.default.createDirectory(at: source.deletingLastPathComponent(), withIntermediateDirectories: true)
+let render = Process(); render.executableURL = tool
+render.arguments = [root.appendingPathComponent("MacApp/AppIcon.icon").path,
+                    "--export-image", "--output-file", source.path, "--platform", "macOS",
+                    "--rendition", "Default", "--width", "1024", "--height", "1024",
+                    "--scale", "1", "--design-generation", "27"]
+try render.run(); render.waitUntilExit()
+precondition(render.terminationStatus == 0, "Icon Composer render failed")
 guard let artwork = NSImage(contentsOf: source) else {
     fatalError("Cannot load app icon artwork at \(source.path)")
 }
@@ -21,8 +39,6 @@ for points in [16, 32, 128, 256, 512] {
         NSGraphicsContext.current!.imageInterpolation = .high
         let context = NSGraphicsContext.current!.cgContext
         context.scaleBy(x: CGFloat(pixels) / 1024, y: CGFloat(pixels) / 1024)
-        NSBezierPath(roundedRect: NSRect(x: 80, y: 80, width: 864, height: 864),
-                     xRadius: 190, yRadius: 190).addClip()
         artwork.draw(in: NSRect(x: 0, y: 0, width: 1024, height: 1024),
                      from: .zero, operation: .sourceOver, fraction: 1)
         NSGraphicsContext.restoreGraphicsState()

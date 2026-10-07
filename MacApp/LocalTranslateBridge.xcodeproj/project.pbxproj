@@ -10,8 +10,13 @@
 		25E9037FA0A1C414FBF00326 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A127E0EF4E2681C99F36968B /* Assets.xcassets */; };
 		27645B2AE35D4FE73D618436 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 129717455B5D4E05323B4719 /* index.html */; };
 		4A6B438587D76AA167BD7131 /* BridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02AAFAB0AB89245304C513B /* BridgeView.swift */; };
+		51F2832084AB79C98A2978E1 /* BrandIconMask.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF2A6A172C6E344661C284F /* BrandIconMask.png */; };
 		5B6A8C217C2B18FA98F2BB43 /* LocalHTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5B7E38612833009ECACA5 /* LocalHTTPServer.swift */; };
 		7A0905AA036AA090448B21BC /* BridgeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D1D549AB1D51052D8CDF07 /* BridgeModel.swift */; };
+		85492F7F168FE4ACBBEB8866 /* BrandIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA38D09375DBE0375936E9CA /* BrandIconView.swift */; };
+		88FE68B7879083F3F5FA37E5 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F142FA2E1C8ADE403ACF4A15 /* AppIcon.icon */; };
+		965E181C5CE9C1618F669F45 /* BrandIcon-Dark.heic in Resources */ = {isa = PBXBuildFile; fileRef = 3D8A5D7C46BD4971E2D72E60 /* BrandIcon-Dark.heic */; };
+		A4D1BD00430E5B925AA9D08F /* BrandIcon-Light.heic in Resources */ = {isa = PBXBuildFile; fileRef = 4EDA7AF12832BF0F8DC3AD0D /* BrandIcon-Light.heic */; };
 		A4DFE70CC9377252A4AF1506 /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8209BA779044339BFA5D99E9 /* AppMain.swift */; };
 		AC91A8F992E0487CC98EFD22 /* TranslationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA5DD264A3AEC55026D150 /* TranslationQueue.swift */; };
 		C71FE856B9DCB26F2BFAA062 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6995BA07F17D6DE3928AE8BB /* PrivacyInfo.xcprivacy */; };
@@ -22,13 +27,18 @@
 		129717455B5D4E05323B4719 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		24E51C85C1FDAAD70F3B17E6 /* LocalTranslateBridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalTranslateBridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FB5B7E38612833009ECACA5 /* LocalHTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalHTTPServer.swift; sourceTree = "<group>"; };
+		3D8A5D7C46BD4971E2D72E60 /* BrandIcon-Dark.heic */ = {isa = PBXFileReference; path = "BrandIcon-Dark.heic"; sourceTree = "<group>"; };
+		4EDA7AF12832BF0F8DC3AD0D /* BrandIcon-Light.heic */ = {isa = PBXFileReference; path = "BrandIcon-Light.heic"; sourceTree = "<group>"; };
 		6995BA07F17D6DE3928AE8BB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		7423EFC2D972B0B9FE3E7D5F /* TranslationProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationProcessor.swift; sourceTree = "<group>"; };
 		8209BA779044339BFA5D99E9 /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
 		A02AAFAB0AB89245304C513B /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
 		A127E0EF4E2681C99F36968B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DECA5DD264A3AEC55026D150 /* TranslationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationQueue.swift; sourceTree = "<group>"; };
+		F142FA2E1C8ADE403ACF4A15 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		F2D1D549AB1D51052D8CDF07 /* BridgeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeModel.swift; sourceTree = "<group>"; };
+		FA38D09375DBE0375936E9CA /* BrandIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandIconView.swift; sourceTree = "<group>"; };
+		FFF2A6A172C6E344661C284F /* BrandIconMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BrandIconMask.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -63,6 +73,10 @@
 			children = (
 				8209BA779044339BFA5D99E9 /* AppMain.swift */,
 				A127E0EF4E2681C99F36968B /* Assets.xcassets */,
+				3D8A5D7C46BD4971E2D72E60 /* BrandIcon-Dark.heic */,
+				4EDA7AF12832BF0F8DC3AD0D /* BrandIcon-Light.heic */,
+				FFF2A6A172C6E344661C284F /* BrandIconMask.png */,
+				FA38D09375DBE0375936E9CA /* BrandIconView.swift */,
 				F2D1D549AB1D51052D8CDF07 /* BridgeModel.swift */,
 				A02AAFAB0AB89245304C513B /* BridgeView.swift */,
 				2FB5B7E38612833009ECACA5 /* LocalHTTPServer.swift */,
@@ -76,6 +90,7 @@
 		D66E53F35BBB18D9F23A3607 = {
 			isa = PBXGroup;
 			children = (
+				F142FA2E1C8ADE403ACF4A15 /* AppIcon.icon */,
 				0C0BA1727DBF77BA0D06E7ED /* apple-translation-bridge */,
 				A56A3D5838E96508E9CAF85C /* MacApp */,
 				5F3469B9B812E4A3120A0CB1 /* Sources */,
@@ -142,7 +157,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88FE68B7879083F3F5FA37E5 /* AppIcon.icon in Resources */,
 				25E9037FA0A1C414FBF00326 /* Assets.xcassets in Resources */,
+				965E181C5CE9C1618F669F45 /* BrandIcon-Dark.heic in Resources */,
+				A4D1BD00430E5B925AA9D08F /* BrandIcon-Light.heic in Resources */,
+				51F2832084AB79C98A2978E1 /* BrandIconMask.png in Resources */,
 				C71FE856B9DCB26F2BFAA062 /* PrivacyInfo.xcprivacy in Resources */,
 				27645B2AE35D4FE73D618436 /* index.html in Resources */,
 			);
@@ -156,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4DFE70CC9377252A4AF1506 /* AppMain.swift in Sources */,
+				85492F7F168FE4ACBBEB8866 /* BrandIconView.swift in Sources */,
 				7A0905AA036AA090448B21BC /* BridgeModel.swift in Sources */,
 				4A6B438587D76AA167BD7131 /* BridgeView.swift in Sources */,
 				5B6A8C217C2B18FA98F2BB43 /* LocalHTTPServer.swift in Sources */,
@@ -203,7 +223,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -272,7 +292,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;

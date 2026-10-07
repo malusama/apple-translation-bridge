@@ -1,0 +1,136 @@
+{
+  "features" : [
+    "refractivity",
+    "specular-location"
+  ],
+  "fill" : "automatic",
+  "groups" : [
+    {
+      "blur-material" : 0,
+      "layers" : [
+        {
+          "fill-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : "system-light"
+            },
+            {
+              "appearance" : "tinted",
+              "value" : "system-light"
+            }
+          ],
+          "glass" : true,
+          "image-name" : "Wen.svg",
+          "name" : "Wen"
+        }
+      ],
+      "lighting" : "individual",
+      "name" : "Wen",
+      "refractivity" : {
+        "depth" : 0.017999999999999999,
+        "enabled" : true,
+        "strength" : 0.035000000000000003
+      },
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.014999999999999999
+      },
+      "specular" : "outside",
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.16
+      }
+    },
+    {
+      "blur-material" : 0.035000000000000003,
+      "layers" : [
+        {
+          "glass" : true,
+          "image-name" : "Chinese glass.svg",
+          "name" : "Chinese glass"
+        }
+      ],
+      "lighting" : "individual",
+      "name" : "Chinese glass",
+      "refractivity" : {
+        "depth" : 0.074999999999999997,
+        "enabled" : true,
+        "strength" : 0.13
+      },
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.089999999999999997
+      },
+      "specular" : "outside",
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.81999999999999995
+      }
+    },
+    {
+      "blur-material" : 0,
+      "layers" : [
+        {
+          "fill-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : "system-light"
+            },
+            {
+              "appearance" : "tinted",
+              "value" : "system-light"
+            }
+          ],
+          "glass" : true,
+          "image-name" : "A.svg",
+          "name" : "A"
+        }
+      ],
+      "lighting" : "individual",
+      "name" : "A",
+      "refractivity" : {
+        "depth" : 0.017999999999999999,
+        "enabled" : true,
+        "strength" : 0.035000000000000003
+      },
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.014999999999999999
+      },
+      "specular" : "outside",
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.10000000000000001
+      }
+    },
+    {
+      "blur-material" : 0.035000000000000003,
+      "layers" : [
+        {
+          "glass" : true,
+          "image-name" : "English glass.svg",
+          "name" : "English glass"
+        }
+      ],
+      "lighting" : "individual",
+      "name" : "English glass",
+      "refractivity" : {
+        "depth" : 0.085000000000000006,
+        "enabled" : true,
+        "strength" : 0.13
+      },
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.10000000000000001
+      },
+      "specular" : "outside",
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.71999999999999997
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "squares" : "shared"
+  }
+}

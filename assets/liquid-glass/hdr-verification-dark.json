@@ -1,0 +1,25 @@
+{
+  "appearance" : "dark",
+  "authoredPeakRelativeToSDRWhite" : 3.4866452217102051,
+  "boostedPixelFraction" : 0.0013980865478515625,
+  "height" : 1024,
+  "highlightCenterNormalizedTopLeft" : [
+    0.375,
+    0.20499999999999999
+  ],
+  "icon-dark-hdr.heic" : {
+    "appleGainMapPresent" : false,
+    "contentHeadroom" : 3.4866461753845215,
+    "decodedPeakLinearP3" : 3.4439749717712402,
+    "isoGainMapPresent" : true
+  },
+  "icon-dark-hdr.jpg" : {
+    "appleGainMapPresent" : false,
+    "contentHeadroom" : 3.4866461753845215,
+    "decodedPeakLinearP3" : 3.4562084674835205,
+    "isoGainMapPresent" : true
+  },
+  "method" : "Native Icon Composer render plus one authored neutral reflection; Core Image Adaptive HDR",
+  "note" : "The gain-map assets enable HDR in the app header and design previews. Dock rendering is supplied by the layered system icon.",
+  "width" : 1024
+}

@@ -1,13 +1,35 @@
-# 本地翻译桥应用图标
+# 本地翻译桥 Liquid Glass 图标
 
-采用 apple-design 的简洁、熟悉和对比原则：用 A / 文 表达语言转换，交叠的蓝色与白色面板表达翻译桥，保持小尺寸下的轮廓清晰。图标使用内置 image_gen 生成，透明背景；原始选定素材保存在 `app-icon-source.png`。
+采用 Apple Icon Composer 的原生分层图标。两片透光玻璃与 A / 文 表达英中翻译；玻璃边缘、高光、折射与层间阴影由系统材质产生。素材是原创 SVG 几何与 Core Text 字形轮廓，本版没有使用栅格图像生成工具。
 
-`swift scripts/generate-icon.swift` 使用 AppKit 导出 macOS 所需的 10 个尺寸，并在导出时采用统一的圆角蒙版清理外缘。完整的 1024 像素应用素材位于 `MacApp/Assets.xcassets/AppIcon.appiconset/icon_512x512@2x.png`。窗口和 Dock 使用同一份应用图标。
+## 设计源与导出
 
-## 生成提示词
+- `MacApp/AppIcon.icon`：应用的分层源文件，包含独立的玻璃与字形图层。
+- `scripts/create-glass-icon.swift`：重建矢量图层和 Icon Composer 配置。
+- `scripts/generate-icon.swift`：通过 Xcode 自带的 Icon Composer 导出默认外观和 macOS 静态兼容尺寸。
+- `assets/liquid-glass/default.png`、`dark.png`：浅色与深色设计预览。系统图标也支持单色外观。
 
-Use case: logo-brand. Asset type: production macOS app icon for Local Translate Bridge (本地翻译桥), an independent on-device English-to-Chinese translator. Generate ONE finished icon, square 1024 by 1024 composition. Design a mature, distinctive native Mac software icon with a restrained blue accent consistent with its existing blue brand. A softly rounded satin porcelain icon tile, centered and occupying about 90 percent of the canvas, with genuinely transparent space outside the tile. Inside, one large sculptural translation symbol formed by two gently interlocking substantial rounded translation plates, a cobalt-blue plate and a pale frosted plate, with deliberate balanced overlap and a clean silhouette. Exactly two large crisp glyphs: a capital Latin 'A' and the Chinese character '文', accurately formed, sober and highly legible. The plates subtly suggest exchanging two languages across a bridge. Front-facing icon, almost orthographic; refined shallow three-dimensional depth, believable thick glass and ceramic edges, soft top-left illumination, precise restrained highlights and a very subtle contact shadow. Excellent optical balance and a strong, simple readable silhouette at 32 pixels. Professional utility app identity, quiet confidence, exquisite material finish, no toy styling. Deliver actual icon artwork, not an icon on a desk and not a presentation sheet. Do not include speech-bubble tails, generic chat icons, gradients in the glyphs, thin illegible details, sparkles, circuit traces, padlocks, slogans, app name text, borders around the image, watermarks, other logos, multiple variants, or any background outside the icon tile. Only the glyphs 'A' and '文' are allowed.
+设计遵循 [Apple 的图标规范](https://developer.apple.com/design/human-interface-guidelines/app-icons) 与 [Icon Composer 的分层材质流程](https://developer.apple.com/icon-composer/)。应用保留编译后的玻璃图层，不用静态 ICNS 强制覆盖 Dock 图标。
 
-## 透明边缘修整提示词
+## HDR 高光
 
-Use case: background-extraction. Refine this finished macOS app icon for production export. Keep the artwork inside the rounded porcelain tile completely unchanged: same blue and frosted translation plates, identical 'A' and '文' glyphs, same composition, colors, materials and lighting. Change ONLY the outside transparency and outer silhouette cleanup. Remove every stray white speck, cyan pixel, glow fragment and disconnected alpha island around the outside perimeter. Outside the single rounded square tile, the canvas must be perfectly transparent with no colored or white pixels and no haze. Preserve a smooth precise continuous antialiased edge on the rounded tile. No added background or cast shadow outside the tile. Preserve centered layout, square canvas and current proportions.
+`scripts/export-icon-hdr.swift` 在玻璃上缘的一小段反光中加入线性亮度能量，然后使用 Core Image 编码为 Adaptive HDR。HEIC 与 JPEG 都包含 ISO 增益图；正常亮度的基准图像仍然保留。高光来自设计中明确指定的局部反射。
+
+- `assets/liquid-glass/icon-light-hdr.heic` / `.jpg`：浅色 HDR 版本。
+- `assets/liquid-glass/icon-dark-hdr.heic` / `.jpg`：深色 HDR 版本。
+- `assets/liquid-glass/hdr-verification-light.json` / `hdr-verification-dark.json`：重新解码后的增益图、动态范围与峰值验证。
+- `highlight-mask-light.png` / `highlight-mask-dark.png`：高光影响范围。
+
+浅色 HEIC 的解码峰值为普通白色的约 2.71 倍，深色 HEIC 约 3.44 倍；增强范围约占 0.13% 的像素。应用窗口使用对应外观的 HEIC，并通过 SwiftUI `allowedDynamicRange(.high)` 允许 HDR 显示。实际屏幕亮度由显示设备和系统决定。聊天中的 PNG 与商店截图是普通亮度预览；Dock 的动态材质由系统渲染，上面的 HDR 数值针对导出文件。
+
+## 重建
+
+```sh
+swift scripts/create-glass-icon.swift
+swift scripts/generate-icon.swift
+# 使用 Xcode 的 ictool 导出 Dark 外观到 assets/liquid-glass/dark.png 后：
+swift scripts/export-icon-hdr.swift assets/liquid-glass/default.png assets/liquid-glass light
+swift scripts/export-icon-hdr.swift assets/liquid-glass/dark.png assets/liquid-glass dark
+```
+
+HDR 图像复制为 `MacApp/BrandIcon-Light.heic`、`MacApp/BrandIcon-Dark.heic`；默认 PNG 提供窗口图标的透明轮廓蒙版。

@@ -8,8 +8,7 @@ struct BridgeView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 HStack(spacing: 16) {
-                    Image(nsImage: NSApplication.shared.applicationIconImage)
-                        .resizable().interpolation(.high).scaledToFit()
+                    BrandIconView()
                         .frame(width: 60, height: 60)
                         .accessibilityHidden(true)
                     VStack(alignment: .leading, spacing: 5) {
