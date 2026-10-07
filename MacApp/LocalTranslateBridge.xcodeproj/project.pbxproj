@@ -1,0 +1,365 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		25E9037FA0A1C414FBF00326 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A127E0EF4E2681C99F36968B /* Assets.xcassets */; };
+		27645B2AE35D4FE73D618436 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 129717455B5D4E05323B4719 /* index.html */; };
+		4A6B438587D76AA167BD7131 /* BridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02AAFAB0AB89245304C513B /* BridgeView.swift */; };
+		5B6A8C217C2B18FA98F2BB43 /* LocalHTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5B7E38612833009ECACA5 /* LocalHTTPServer.swift */; };
+		7A0905AA036AA090448B21BC /* BridgeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D1D549AB1D51052D8CDF07 /* BridgeModel.swift */; };
+		A4DFE70CC9377252A4AF1506 /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8209BA779044339BFA5D99E9 /* AppMain.swift */; };
+		AC91A8F992E0487CC98EFD22 /* TranslationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA5DD264A3AEC55026D150 /* TranslationQueue.swift */; };
+		C71FE856B9DCB26F2BFAA062 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6995BA07F17D6DE3928AE8BB /* PrivacyInfo.xcprivacy */; };
+		F2E2FBCAAAF249B4B46951E0 /* TranslationProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7423EFC2D972B0B9FE3E7D5F /* TranslationProcessor.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		129717455B5D4E05323B4719 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		24E51C85C1FDAAD70F3B17E6 /* LocalTranslateBridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalTranslateBridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FB5B7E38612833009ECACA5 /* LocalHTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalHTTPServer.swift; sourceTree = "<group>"; };
+		6995BA07F17D6DE3928AE8BB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		7423EFC2D972B0B9FE3E7D5F /* TranslationProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationProcessor.swift; sourceTree = "<group>"; };
+		8209BA779044339BFA5D99E9 /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
+		A02AAFAB0AB89245304C513B /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
+		A127E0EF4E2681C99F36968B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DECA5DD264A3AEC55026D150 /* TranslationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationQueue.swift; sourceTree = "<group>"; };
+		F2D1D549AB1D51052D8CDF07 /* BridgeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0C0BA1727DBF77BA0D06E7ED /* apple-translation-bridge */ = {
+			isa = PBXGroup;
+			children = (
+				129717455B5D4E05323B4719 /* index.html */,
+			);
+			name = "apple-translation-bridge";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		5F3469B9B812E4A3120A0CB1 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				7423EFC2D972B0B9FE3E7D5F /* TranslationProcessor.swift */,
+			);
+			name = Sources;
+			path = ../Sources;
+			sourceTree = "<group>";
+		};
+		844BD4C22D3CF5ADAA6F78AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24E51C85C1FDAAD70F3B17E6 /* LocalTranslateBridge.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A56A3D5838E96508E9CAF85C /* MacApp */ = {
+			isa = PBXGroup;
+			children = (
+				8209BA779044339BFA5D99E9 /* AppMain.swift */,
+				A127E0EF4E2681C99F36968B /* Assets.xcassets */,
+				F2D1D549AB1D51052D8CDF07 /* BridgeModel.swift */,
+				A02AAFAB0AB89245304C513B /* BridgeView.swift */,
+				2FB5B7E38612833009ECACA5 /* LocalHTTPServer.swift */,
+				6995BA07F17D6DE3928AE8BB /* PrivacyInfo.xcprivacy */,
+				DECA5DD264A3AEC55026D150 /* TranslationQueue.swift */,
+			);
+			name = MacApp;
+			path = .;
+			sourceTree = "<group>";
+		};
+		D66E53F35BBB18D9F23A3607 = {
+			isa = PBXGroup;
+			children = (
+				0C0BA1727DBF77BA0D06E7ED /* apple-translation-bridge */,
+				A56A3D5838E96508E9CAF85C /* MacApp */,
+				5F3469B9B812E4A3120A0CB1 /* Sources */,
+				844BD4C22D3CF5ADAA6F78AF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		088D1EB1744A46EF445E3098 /* LocalTranslateBridge */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70CD2C9FA7085DCC16ECAADC /* Build configuration list for PBXNativeTarget "LocalTranslateBridge" */;
+			buildPhases = (
+				CA3F0345F2286BBC3DF2B558 /* Sources */,
+				8BA6691BE6F2BF44F026B8F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LocalTranslateBridge;
+			packageProductDependencies = (
+			);
+			productName = LocalTranslateBridge;
+			productReference = 24E51C85C1FDAAD70F3B17E6 /* LocalTranslateBridge.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3D8809A5814BDD2381666350 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					088D1EB1744A46EF445E3098 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1F5F42AEB641DEF0E09141F4 /* Build configuration list for PBXProject "LocalTranslateBridge" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D66E53F35BBB18D9F23A3607;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 844BD4C22D3CF5ADAA6F78AF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				088D1EB1744A46EF445E3098 /* LocalTranslateBridge */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8BA6691BE6F2BF44F026B8F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25E9037FA0A1C414FBF00326 /* Assets.xcassets in Resources */,
+				C71FE856B9DCB26F2BFAA062 /* PrivacyInfo.xcprivacy in Resources */,
+				27645B2AE35D4FE73D618436 /* index.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CA3F0345F2286BBC3DF2B558 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4DFE70CC9377252A4AF1506 /* AppMain.swift in Sources */,
+				7A0905AA036AA090448B21BC /* BridgeModel.swift in Sources */,
+				4A6B438587D76AA167BD7131 /* BridgeView.swift in Sources */,
+				5B6A8C217C2B18FA98F2BB43 /* LocalHTTPServer.swift in Sources */,
+				F2E2FBCAAAF249B4B46951E0 /* TranslationProcessor.swift in Sources */,
+				AC91A8F992E0487CC98EFD22 /* TranslationQueue.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2010F5577B07B3A403D82C0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		2AD72B751F5A6B3450AC5882 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		5A8F6309E2B51E3E98FC4208 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 malusama";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.malusama.LocalTranslateBridge;
+				PRODUCT_NAME = LocalTranslateBridge;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E13966949DBC8A103E28F4A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 malusama";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.malusama.LocalTranslateBridge;
+				PRODUCT_NAME = LocalTranslateBridge;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1F5F42AEB641DEF0E09141F4 /* Build configuration list for PBXProject "LocalTranslateBridge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2010F5577B07B3A403D82C0E /* Debug */,
+				2AD72B751F5A6B3450AC5882 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		70CD2C9FA7085DCC16ECAADC /* Build configuration list for PBXNativeTarget "LocalTranslateBridge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E13966949DBC8A103E28F4A8 /* Debug */,
+				5A8F6309E2B51E3E98FC4208 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3D8809A5814BDD2381666350 /* Project object */;
+}

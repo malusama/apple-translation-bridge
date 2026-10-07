@@ -4,12 +4,35 @@ Turn Apple's on-device Translation framework into a local HTTP API for Immersive
 
 在 Apple silicon Mac 上运行的本地翻译服务，直接调用 Apple 的公开 Translation framework。默认使用 `lowLatency` 模式和英文→中文语言包，下载后可离线翻译。提供沉浸式翻译自定义接口、语言包安装器、浏览器测试页面和登录自启动脚本。
 
+## 原生 macOS App
+
+`MacApp/` 包含独立的沙盒应用「本地翻译桥 / Local Translate Bridge」。它提供文本翻译窗口、系统语言包下载入口、菜单栏和本机 HTTP 接口，使用同一套 Swift 翻译核心。App 运行时不依赖 Python 或 shell 脚本。
+
+![本地翻译桥界面](screenshots/mac/01-translation.jpg)
+
+使用 Xcode 和 [XcodeGen](https://github.com/yonaskolb/XcodeGen) 构建：
+
+```bash
+xcodegen generate --spec MacApp/project.yml
+xcodebuild -project MacApp/LocalTranslateBridge.xcodeproj \
+  -scheme LocalTranslateBridge -configuration Debug \
+  -destination 'platform=macOS' -derivedDataPath .build/mac-app \
+  CODE_SIGNING_ALLOWED=NO build
+codesign --force --deep --sign - --entitlements MacApp/App.entitlements \
+  .build/mac-app/Build/Products/Debug/LocalTranslateBridge.app
+open .build/mac-app/Build/Products/Debug/LocalTranslateBridge.app
+```
+
+在 App 中下载英文和简体中文语言包后，可以直接翻译文本，或点击「启动接口」接入沉浸式翻译。默认监听 `127.0.0.1:3210`，端口被占用时可在窗口中修改。接口只能从本机连接。关闭窗口后 App 会留在菜单栏，退出 App 会停止接口；登录启动默认关闭，需自行开启。
+
+首版界面为简体中文，翻译窗口和下载入口提供英文→简体中文。`metadata/` 保存中英文商店资料及审核说明，`docs/` 保存[使用帮助](https://malusama.github.io/apple-translation-bridge/)和[隐私政策](https://malusama.github.io/apple-translation-bridge/privacy.html)。商店审核和上架状态以 App Store Connect 为准。
+
 ## 要求
 
 - Apple silicon Mac（M1 或更新）。
 - macOS **26.4 或更新**。
 - Xcode 或 Command Line Tools，包含 macOS **26.4+ SDK** 和 Swift 6 工具链。
-- Python **3.9+**，只使用标准库。
+- 命令行服务需要 Python **3.9+**，只使用标准库。原生 App 不需要 Python。
 - 首次下载语言包时，需要在 Mac 桌面确认 Apple 的系统下载提示。
 
 语言包由 macOS 下载和管理，不包含在仓库中。

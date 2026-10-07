@@ -1,0 +1,11 @@
+Local Translate Bridge is a self-contained, sandboxed macOS utility. It uses the public Apple Translation framework to translate English into Simplified Chinese entirely on-device. It has no accounts, paid features, ads, analytics SDKs, helper installers, Python dependency, or background processes outside the app.
+
+Requirements: an Apple Silicon Mac with macOS 26.4 or later.
+
+Review steps (the first-version UI is in Simplified Chinese):
+1. Open the app. If the language status says downloads are needed, click 下载语言包 (Download language packs), then download English and Simplified Chinese in Apple's system sheet. Click Done and 重新检查 (Recheck) if necessary.
+2. Leave the sample English text in the left editor and click 翻译成中文 (Translate into Chinese), or press Command-Return. The Chinese result appears in the right pane. This standalone workflow does not require any other app.
+3. Optionally click 启动接口 (Start local API). The app listens only on 127.0.0.1 using the chosen port (default 3210). Copy the /imme address for a compatible custom translation client. If the port is already occupied, choose another port. The browser extension is an optional integration.
+4. Closing the window leaves the app in the menu bar; reopening the app shows the window. Quitting from the menu bar or Command-Q stops all app activity and the local listener.
+
+Login startup is disabled by default and only enabled when the user checks the login toggle. Translation text and statistics are not persisted. The app declares the UserDefaults required-reason API for its sandboxed preferences. Initial language-pack downloads are handled by the system; installed packs allow offline translation.

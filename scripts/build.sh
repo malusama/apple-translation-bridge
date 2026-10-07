@@ -20,7 +20,7 @@ PY
 
 mkdir -p "$build_dir/AppleTranslationSetup.app/Contents/MacOS"
 xcrun --sdk macosx swiftc -swift-version 6 -parse-as-library -O \
-  -target arm64-apple-macos26.4 "$repo_dir/Sources/TranslationWorker.swift" \
+  -target arm64-apple-macos26.4 "$repo_dir/Sources/TranslationWorker.swift" "$repo_dir/Sources/TranslationProcessor.swift" \
   -o "$build_dir/translation-worker.next"
 xcrun --sdk macosx swiftc -swift-version 6 -parse-as-library -O \
   -target arm64-apple-macos26.4 "$repo_dir/Sources/LanguageSetup.swift" \
