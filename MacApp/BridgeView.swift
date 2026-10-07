@@ -8,10 +8,10 @@ struct BridgeView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 HStack(spacing: 16) {
-                    Image(systemName: "character.bubble.fill")
-                        .font(.system(size: 35)).foregroundStyle(.blue)
+                    Image(nsImage: NSApplication.shared.applicationIconImage)
+                        .resizable().interpolation(.high).scaledToFit()
                         .frame(width: 60, height: 60)
-                        .background(.blue.opacity(0.09), in: RoundedRectangle(cornerRadius: 16))
+                        .accessibilityHidden(true)
                     VStack(alignment: .leading, spacing: 5) {
                         Text("本地翻译桥").font(.largeTitle.weight(.semibold))
                         Text("英文译中文，在你的 Mac 上完成。").foregroundStyle(.secondary)

@@ -1,8 +1,12 @@
 import AppKit
 import Foundation
 
-// Original app artwork, drawn with AppKit so every size can be regenerated.
+// Export the selected artwork at every macOS icon size with a clean tile edge.
 let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
+let source = root.appendingPathComponent("assets/app-icon-source.png")
+guard let artwork = NSImage(contentsOf: source) else {
+    fatalError("Cannot load app icon artwork at \(source.path)")
+}
 let directory = root.appendingPathComponent("MacApp/Assets.xcassets/AppIcon.appiconset")
 try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
 var images: [[String: String]] = []
@@ -14,29 +18,13 @@ for points in [16, 32, 128, 256, 512] {
                                       colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)!
         NSGraphicsContext.saveGraphicsState()
         NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)
+        NSGraphicsContext.current!.imageInterpolation = .high
         let context = NSGraphicsContext.current!.cgContext
         context.scaleBy(x: CGFloat(pixels) / 1024, y: CGFloat(pixels) / 1024)
-
-        let base = NSBezierPath(roundedRect: NSRect(x: 48, y: 48, width: 928, height: 928), xRadius: 205, yRadius: 205)
-        NSGradient(starting: NSColor(red: 0.19, green: 0.57, blue: 0.98, alpha: 1),
-                   ending: NSColor(red: 0.08, green: 0.28, blue: 0.79, alpha: 1))!.draw(in: base, angle: -90)
-        func bubble(_ rect: NSRect, tailLeft: Bool, opacity: CGFloat) {
-            let shape = NSBezierPath(roundedRect: rect, xRadius: 65, yRadius: 65)
-            let tail = NSBezierPath()
-            let x = tailLeft ? rect.minX + 60 : rect.maxX - 60
-            tail.move(to: NSPoint(x: x, y: rect.minY + 25))
-            tail.line(to: NSPoint(x: x, y: rect.minY - 55))
-            tail.line(to: NSPoint(x: x + (tailLeft ? 100 : -100), y: rect.minY + 25))
-            tail.close()
-            NSColor.white.withAlphaComponent(opacity).setFill(); shape.fill(); tail.fill()
-        }
-        bubble(NSRect(x: 165, y: 445, width: 390, height: 330), tailLeft: true, opacity: 0.90)
-        bubble(NSRect(x: 475, y: 270, width: 385, height: 330), tailLeft: false, opacity: 1)
-        let ink = NSColor(red: 0.08, green: 0.30, blue: 0.70, alpha: 1)
-        let a: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 240, weight: .semibold), .foregroundColor: ink]
-        ("A" as NSString).draw(at: NSPoint(x: 275, y: 455), withAttributes: a)
-        let chinese: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 225, weight: .medium), .foregroundColor: ink]
-        ("译" as NSString).draw(at: NSPoint(x: 550, y: 288), withAttributes: chinese)
+        NSBezierPath(roundedRect: NSRect(x: 80, y: 80, width: 864, height: 864),
+                     xRadius: 190, yRadius: 190).addClip()
+        artwork.draw(in: NSRect(x: 0, y: 0, width: 1024, height: 1024),
+                     from: .zero, operation: .sourceOver, fraction: 1)
         NSGraphicsContext.restoreGraphicsState()
         let filename = "icon_\(points)x\(points)@\(scale)x.png"
         try bitmap.representation(using: .png, properties: [:])!.write(to: directory.appendingPathComponent(filename))

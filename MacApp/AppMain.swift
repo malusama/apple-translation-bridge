@@ -20,6 +20,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var toggleItem: NSMenuItem?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        if let iconURL = Bundle.main.url(forResource: "AppIcon", withExtension: "icns"),
+           let icon = NSImage(contentsOf: iconURL) {
+            NSApplication.shared.applicationIconImage = icon
+        }
         let menu = NSMenu()
         let appMenu = NSMenu()
         appMenu.addItem(withTitle: "关于本地翻译桥", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: "")
