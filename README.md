@@ -25,7 +25,7 @@ open .build/mac-app/Build/Products/Debug/LocalTranslateBridge.app
 
 在 App 中下载英文和简体中文语言包后，可以直接翻译文本，或点击「启动接口」接入沉浸式翻译。默认监听 `127.0.0.1:3210`，端口被占用时可在窗口中修改。接口只能从本机连接。关闭窗口后 App 会留在菜单栏，退出 App 会停止接口；登录启动默认关闭，需自行开启。
 
-首版界面为简体中文，翻译窗口和下载入口提供英文→简体中文。`metadata/` 保存中英文商店资料及审核说明，`docs/` 保存[使用帮助](https://malusama.github.io/apple-translation-bridge/)和[隐私政策](https://malusama.github.io/apple-translation-bridge/privacy.html)。商店审核和上架状态以 App Store Connect 为准。
+首版界面为简体中文，翻译窗口和下载入口提供英文→简体中文。`metadata/` 保存中英文商店资料及审核说明，`docs/` 保存[使用帮助](https://malu.moe/apple-translation-bridge/)和[隐私政策](https://malu.moe/apple-translation-bridge/privacy.html)。商店审核和上架状态以 App Store Connect 为准。
 
 ## 要求
 

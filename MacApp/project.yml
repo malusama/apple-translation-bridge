@@ -40,6 +40,8 @@ targets:
     info:
       path: Info.plist
       properties:
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         CFBundleDisplayName: 本地翻译桥
         CFBundleName: LocalTranslateBridge
         NSPrincipalClass: NSApplication

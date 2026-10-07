@@ -120,8 +120,8 @@ struct BridgeView: View {
                     Label(error, systemImage: "exclamationmark.circle").foregroundStyle(.red).textSelection(.enabled)
                 }
                 HStack(spacing: 18) {
-                    Link("使用帮助", destination: URL(string: "https://malusama.github.io/apple-translation-bridge/")!)
-                    Link("隐私政策", destination: URL(string: "https://malusama.github.io/apple-translation-bridge/privacy.html")!)
+                    Link("使用帮助", destination: URL(string: "https://malu.moe/apple-translation-bridge/")!)
+                    Link("隐私政策", destination: URL(string: "https://malu.moe/apple-translation-bridge/privacy.html")!)
                     Spacer()
                     Text("1.0 · Apple Translation").foregroundStyle(.tertiary)
                 }.font(.caption)

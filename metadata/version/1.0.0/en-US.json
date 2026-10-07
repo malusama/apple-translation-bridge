@@ -2,6 +2,6 @@
   "description": "Translate English into Simplified Chinese on your Mac with Apple's on-device Translation framework. After downloading the language packs, translation works offline.\n\n• Paste English text, translate multiple lines, and copy the Chinese result.\n• Start an optional local API for compatible custom translation clients, including browser extensions.\n• The API binds only to 127.0.0.1, with a configurable port.\n• Control the API from the menu bar. Quitting the app stops the service.\n• Login startup is optional and off by default.\n• No accounts, ads, or translation history. Source and translated text are not uploaded by the app.\n\nRequires an Apple Silicon Mac with macOS 26.4 or later. English and Simplified Chinese language packs must be downloaded before use. The first-version interface is in Simplified Chinese. A browser extension is an optional integration; the app translates text independently.",
   "keywords": "translation,offline,English,Chinese,local,text,menu bar,custom API",
   "promotionalText": "English to Chinese translation on your Mac, with an optional local API for compatible clients.",
-  "supportUrl": "https://malusama.github.io/apple-translation-bridge/",
-  "marketingUrl": "https://malusama.github.io/apple-translation-bridge/"
+  "supportUrl": "https://malu.moe/apple-translation-bridge/",
+  "marketingUrl": "https://malu.moe/apple-translation-bridge/"
 }
