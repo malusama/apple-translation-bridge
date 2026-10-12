@@ -1,11 +1,23 @@
-Local Translate Bridge is a self-contained, sandboxed macOS utility. It uses the public Apple Translation framework to translate English into Simplified Chinese entirely on-device. It has no accounts, paid features, ads, analytics SDKs, helper installers, Python dependency, or background processes outside the app.
+Build 1.0.0 (5) addresses Guideline 4 - Design:
+The app now has a standard Window menu titled 窗口. Its 打开翻译窗口 (Open translation window) item, also available with Command-0, stays available after the main window is closed and restores a minimized window. The status-bar menu and Dock also reopen the same main window.
 
-Requirements: an Apple Silicon Mac with macOS 26.4 or later.
+The main window is now focused on starting the local translation API and guiding users through Immersive Translate setup. It contains language-pack preparation, service start/stop controls, running status, the API address and a copy button, and three setup steps. It does not have a standalone text editor. Store descriptions and screenshots show this service interface.
 
-Review steps (the first-version UI is in Simplified Chinese):
-1. Open the app. If the language status says downloads are needed, click 下载语言包 (Download language packs), then download English and Simplified Chinese in Apple's system sheet. Click Done and 重新检查 (Recheck) if necessary.
-2. Leave the sample English text in the left editor and click 翻译成中文 (Translate into Chinese), or press Command-Return. The Chinese result appears in the right pane. This standalone workflow does not require any other app.
-3. Optionally click 启动接口 (Start local API). The app listens only on 127.0.0.1 using the chosen port (default 3210). Copy the /imme address for a compatible custom translation client. If the port is already occupied, choose another port. The browser extension is an optional integration.
-4. Closing the window leaves the app in the menu bar; reopening the app shows the window. Quitting from the menu bar or Command-Q stops all app activity and the local listener.
+To verify the window fix:
+1. Launch the app and close the main window with its red close button.
+2. Choose 窗口 > 打开翻译窗口 from the app's menu bar. The main window reopens.
+3. Minimize the window, then choose the same item or press Command-0. The window is restored.
+Closing the window keeps the local service running; quitting the app stops it.
 
-Login startup is disabled by default and only enabled when the user checks the login toggle. Translation text and statistics are not persisted. The app declares the UserDefaults required-reason API for its sandboxed preferences. Initial language-pack downloads are handled by the system; installed packs allow offline translation.
+Required incoming-network entitlement:
+com.apple.security.network.server is required for the user-started, in-process HTTP translation server. The public Network.framework NWListener API binds only to IPv4 loopback 127.0.0.1 (default port 3210, user-configurable). It receives HTTP requests from clients or a browser on the same Mac. It does not listen on a LAN or public interface and creates no separate daemon. The client entitlement alone cannot authorize incoming connections.
+
+To verify the service without installing a browser extension:
+1. On an Apple Silicon Mac with macOS 26.4 or later, open the app. If needed, click 下载语言包 (Download language packs), download English and Simplified Chinese in Apple's system sheet, then click 重新检查语言包 (Recheck language packs).
+2. Click 启动接口服务 (Start API service). The running status and a copyable /imme URL appear.
+3. Open http://127.0.0.1:3210/ in any browser on that Mac. This bundled test page is served by the app and can send translation requests. GET /health returns JSON status; POST /imme or /translate accepts JSON containing source_lang, target_lang, and text_list and returns on-device translations. If the port is occupied, choose another port in the app and use it in these URLs.
+4. Close the app's main window and verify the local page/API continues to work. Use the Window menu or Command-0 to reopen the window. Click 停止服务 (Stop service), or quit the app, to stop the listener.
+
+Optional Immersive Translate integration: enable Beta features in the extension's developer settings, choose its custom API translation service, and paste the app's /imme address. No API key is required. Set the target language to Simplified Chinese.
+
+The app is self-contained and sandboxed. It has no accounts, paid features, ads, analytics SDKs, helper installers, Python dependency, or background processes outside the app. Login startup is off by default and only enabled by the user. Translation text and statistics are not persisted. UserDefaults is declared with a required reason. System language-pack downloads enable offline translation.

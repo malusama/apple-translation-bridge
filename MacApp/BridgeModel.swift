@@ -5,9 +5,6 @@ import ServiceManagement
 
 @MainActor @Observable
 final class BridgeModel {
-    var sourceText = "The translation runs entirely on your Mac, even when you are offline."
-    var translatedText = ""
-    var translating = false
     var checking = false
     var downloading = false
     var languageReady = false
@@ -86,25 +83,6 @@ final class BridgeModel {
         } catch {
             errorMessage = "语言包下载未完成：\(error.localizedDescription)"
             await refreshLanguages()
-        }
-    }
-
-    func translate() async {
-        guard !translating, !sourceText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-        translating = true
-        errorMessage = nil
-        defer { translating = false }
-        let payload: [String: Any] = ["op": "translate", "source_lang": "en", "target_lang": "zh-CN", "text_list": sourceText.components(separatedBy: "\n")]
-        guard let data = try? JSONSerialization.data(withJSONObject: payload) else { return }
-        let result = await queue.submit(data)
-        if let value = (try? JSONSerialization.jsonObject(with: result)) as? [String: Any] {
-            if let error = value["error"] as? [String: Any] {
-                errorMessage = error["message"] as? String ?? "翻译失败，请重试。"
-                if error["code"] as? String == "model_not_installed" { await refreshLanguages() }
-            } else if let rows = value["translations"] as? [[String: Any]] {
-                translatedText = rows.compactMap { $0["text"] as? String }.joined(separator: "\n")
-                lastElapsed = value["elapsed_ms"] as? Int
-            }
         }
     }
 

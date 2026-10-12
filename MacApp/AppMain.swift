@@ -34,12 +34,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         edit.addItem(withTitle: "粘贴", action: #selector(NSText.paste(_:)), keyEquivalent: "v")
         edit.addItem(withTitle: "全选", action: #selector(NSText.selectAll(_:)), keyEquivalent: "a")
         let editItem = NSMenuItem(title: "编辑", action: nil, keyEquivalent: ""); editItem.submenu = edit; menu.addItem(editItem)
-        NSApplication.shared.mainMenu = menu
 
-        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 860, height: 825), styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: false)
+        let windowMenu = NSMenu(title: "窗口")
+        let openWindowItem = NSMenuItem(title: "打开翻译窗口", action: #selector(showWindow), keyEquivalent: "0")
+        openWindowItem.target = self
+        windowMenu.addItem(openWindowItem)
+        windowMenu.addItem(.separator())
+        windowMenu.addItem(withTitle: "最小化", action: #selector(NSWindow.performMiniaturize(_:)), keyEquivalent: "m")
+        windowMenu.addItem(withTitle: "缩放", action: #selector(NSWindow.performZoom(_:)), keyEquivalent: "")
+        windowMenu.addItem(.separator())
+        windowMenu.addItem(withTitle: "全部置于前端", action: #selector(NSApplication.arrangeInFront(_:)), keyEquivalent: "")
+        let windowMenuItem = NSMenuItem(title: "窗口", action: nil, keyEquivalent: "")
+        windowMenuItem.submenu = windowMenu
+        menu.addItem(windowMenuItem)
+        NSApplication.shared.mainMenu = menu
+        NSApplication.shared.windowsMenu = windowMenu
+
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 860, height: 760), styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: false)
         window.title = "本地翻译桥"
         window.contentView = NSHostingView(rootView: BridgeView(model: model))
-        window.minSize = NSSize(width: 800, height: 790)
+        window.minSize = NSSize(width: 800, height: 680)
         window.isReleasedWhenClosed = false
         window.center()
         #if DEBUG
@@ -79,7 +93,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ notification: Notification) { model.shutdown() }
 
     @objc private func showWindow() {
-        window?.makeKeyAndOrderFront(nil)
+        guard let window else { return }
+        if window.isMiniaturized {
+            window.deminiaturize(nil)
+        }
+        NSApplication.shared.unhide(nil)
+        window.makeKeyAndOrderFront(nil)
         NSApplication.shared.activate()
     }
 

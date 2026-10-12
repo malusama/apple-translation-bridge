@@ -3,134 +3,184 @@ import SwiftUI
 
 struct BridgeView: View {
     @Bindable var model: BridgeModel
+    @State private var copiedEndpoint: String?
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
-                HStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 22) {
+                HStack(spacing: 14) {
                     BrandIconView()
-                        .frame(width: 60, height: 60)
+                        .frame(width: 52, height: 52)
                         .accessibilityHidden(true)
-                    VStack(alignment: .leading, spacing: 5) {
+                    VStack(alignment: .leading, spacing: 4) {
                         Text("本地翻译桥").font(.largeTitle.weight(.semibold))
-                        Text("英文译中文，在你的 Mac 上完成。").foregroundStyle(.secondary)
-                    }
-                    Spacer()
-                }
-
-                GroupBox {
-                    HStack(alignment: .center, spacing: 12) {
-                        Image(systemName: model.languageReady ? "checkmark.circle.fill" : "arrow.down.circle")
-                            .font(.title2).foregroundStyle(model.languageReady ? .green : .blue)
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(model.languageStatus).font(.headline)
-                            Text("首次使用需要下载 Apple 语言包。下载后，翻译可离线使用。")
-                                .font(.callout).foregroundStyle(.secondary)
-                        }
-                        Spacer()
-                        if model.checking || model.downloading { ProgressView().controlSize(.small) }
-                        if !model.languageReady {
-                            Button(model.downloading ? "正在下载…" : "下载语言包") { model.requestDownload() }
-                                .disabled(model.downloading).buttonStyle(.borderedProminent)
-                        }
-                        Button("重新检查") { Task { await model.refreshLanguages() } }
-                            .disabled(model.checking || model.downloading)
-                    }.padding(8)
-                }
-
-                VStack(alignment: .leading, spacing: 12) {
-                    HStack {
-                        Text("翻译文本").font(.title2.weight(.semibold))
-                        Spacer()
-                        if let elapsed = model.lastElapsed { Text("\(elapsed) ms").font(.caption.monospacedDigit()).foregroundStyle(.secondary) }
-                    }
-                    HStack(alignment: .top, spacing: 16) {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("英文").font(.headline)
-                            TextEditor(text: $model.sourceText)
-                                .font(.body).scrollContentBackground(.hidden)
-                                .padding(8).frame(minHeight: 155)
-                                .background(.background, in: RoundedRectangle(cornerRadius: 10))
-                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(nsColor: .separatorColor).opacity(0.6)))
-                                .accessibilityLabel("英文原文")
-                        }
-                        VStack(alignment: .leading, spacing: 8) {
-                            HStack {
-                                Text("简体中文").font(.headline)
-                                Spacer()
-                                Button { model.copy(model.translatedText) } label: { Image(systemName: "doc.on.doc") }
-                                    .buttonStyle(.borderless).disabled(model.translatedText.isEmpty).help("复制译文")
-                            }
-                            ScrollView {
-                                Text(model.translatedText.isEmpty ? "译文会显示在这里" : model.translatedText)
-                                    .foregroundStyle(model.translatedText.isEmpty ? .secondary : .primary)
-                                    .textSelection(.enabled).frame(maxWidth: .infinity, alignment: .topLeading).padding(12)
-                            }.frame(minHeight: 171, maxHeight: 171)
-                                .background(.background, in: RoundedRectangle(cornerRadius: 10))
-                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(nsColor: .separatorColor).opacity(0.6)))
-                                .accessibilityLabel("中文译文")
-                        }
-                    }
-                    HStack {
-                        Text("文本留在本机，不保存翻译历史。").font(.callout).foregroundStyle(.secondary)
-                        Spacer()
-                        if model.translating { ProgressView().controlSize(.small) }
-                        Button(model.translating ? "正在翻译…" : "翻译成中文") { Task { await model.translate() } }
-                            .keyboardShortcut(.return, modifiers: .command)
-                            .buttonStyle(.borderedProminent)
-                            .disabled(!model.languageReady || model.translating || model.sourceText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                    }
-                }
-
-                Divider()
-
-                VStack(alignment: .leading, spacing: 12) {
-                    HStack {
-                        Label("本地翻译接口", systemImage: "network").font(.title2.weight(.semibold))
-                        Spacer()
-                        Circle().fill(model.serviceRunning ? .green : .secondary).frame(width: 8, height: 8)
-                        Text(model.serviceRunning ? "运行中" : model.serviceStarting ? "正在启动…" : "已停止")
+                        Text("为沉浸式翻译提供 Mac 本地翻译服务。")
                             .foregroundStyle(.secondary)
                     }
-                    HStack(spacing: 10) {
-                        Text("端口")
-                        TextField("3210", text: $model.portText).textFieldStyle(.roundedBorder).frame(width: 85)
-                            .disabled(model.serviceRunning || model.serviceStarting).accessibilityLabel("接口端口")
-                        Button(model.serviceRunning ? "停止接口" : "启动接口") {
-                            if model.serviceRunning { model.stopService() } else { model.startService() }
-                        }.disabled(!model.languageReady || model.serviceStarting)
-                        Spacer()
-                        if model.requestCount > 0 { Text("已处理 \(model.translatedRows) 段文本").foregroundStyle(.secondary).font(.callout) }
-                    }
-                    HStack {
-                        Text(model.endpoint).font(.system(.body, design: .monospaced)).textSelection(.enabled)
-                        Spacer()
-                        Button("复制地址") { model.copy(model.endpoint) }.disabled(!model.serviceRunning)
-                    }.padding(12).background(Color.secondary.opacity(0.06), in: RoundedRectangle(cornerRadius: 10))
-                    Text("沉浸式翻译 → 设置 → 翻译服务 → 自定义接口：粘贴上面的地址。")
-                        .font(.callout).foregroundStyle(.secondary)
-                    Text("接口仅接受这台 Mac 上的连接。关闭窗口后可从菜单栏打开；退出 App 会停止接口。")
-                        .font(.callout).foregroundStyle(.secondary)
-                    Toggle("登录时打开本地翻译桥", isOn: Binding(get: { model.launchAtLogin }, set: { model.setLaunchAtLogin($0) }))
-                        .toggleStyle(.checkbox)
+                    Spacer()
                 }
 
+                serviceSection
+                setupSection
+
                 if let error = model.errorMessage {
-                    Label(error, systemImage: "exclamationmark.circle").foregroundStyle(.red).textSelection(.enabled)
+                    Label(error, systemImage: "exclamationmark.circle")
+                        .foregroundStyle(.red)
+                        .textSelection(.enabled)
                 }
-                HStack(spacing: 18) {
-                    Link("使用帮助", destination: URL(string: "https://malu.moe/apple-translation-bridge/")!)
-                    Link("隐私政策", destination: URL(string: "https://malu.moe/apple-translation-bridge/privacy.html")!)
-                    Spacer()
-                    Text("1.0 · Apple Translation").foregroundStyle(.tertiary)
-                }.font(.caption)
-            }.padding(28)
+
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("关闭窗口后服务继续运行。通过「窗口 → 打开翻译窗口」或 ⌘0 恢复窗口；退出 App 会停止服务。")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                    HStack(spacing: 16) {
+                        Toggle("登录时打开本地翻译桥", isOn: Binding(
+                            get: { model.launchAtLogin },
+                            set: { model.setLaunchAtLogin($0) }
+                        ))
+                        .toggleStyle(.checkbox)
+                        Spacer()
+                        Link("使用帮助", destination: URL(string: "https://malu.moe/apple-translation-bridge/")!)
+                        Link("隐私政策", destination: URL(string: "https://malu.moe/apple-translation-bridge/privacy.html")!)
+                    }
+                    .font(.caption)
+                }
+            }
+            .padding(28)
         }
         .background(Color(nsColor: .windowBackgroundColor))
-        .frame(minWidth: 780, minHeight: 750)
+        .frame(minWidth: 740, minHeight: 620)
+        .onChange(of: model.endpoint) { copiedEndpoint = nil }
         .task { await model.initialize() }
         .translationTask(model.downloadConfiguration) { session in
             await model.installLanguages(using: session)
+        }
+    }
+
+    private var serviceSection: some View {
+        GroupBox {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack(spacing: 14) {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Label("启动接口服务", systemImage: "network")
+                            .font(.title2.weight(.semibold))
+                        HStack(spacing: 6) {
+                            Circle()
+                                .fill(model.serviceRunning ? .green : .secondary)
+                                .frame(width: 7, height: 7)
+                            Text(model.serviceRunning ? "运行中 · 可以连接沉浸式翻译" : model.serviceStarting ? "正在启动…" : "尚未启动")
+                                .foregroundStyle(.secondary)
+                        }
+                        .font(.callout)
+                    }
+                    Spacer()
+                    if model.serviceRunning {
+                        Button("停止服务") { model.stopService() }
+                            .buttonStyle(.bordered)
+                            .controlSize(.large)
+                    } else {
+                        Button(model.serviceStarting ? "正在启动…" : "启动接口服务") { model.startService() }
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.large)
+                            .disabled(!model.languageReady || model.serviceStarting)
+                    }
+                }
+
+                HStack(spacing: 10) {
+                    Image(systemName: model.languageReady ? "checkmark.circle.fill" : "arrow.down.circle")
+                        .foregroundStyle(model.languageReady ? .green : .blue)
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text(model.languageStatus).font(.callout.weight(.medium))
+                        Text(model.languageReady ? "Apple 在本机完成翻译，语言包可离线使用。" : "首次使用先下载英文和简体中文语言包。")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    Spacer()
+                    if model.checking || model.downloading { ProgressView().controlSize(.small) }
+                    if !model.languageReady {
+                        Button(model.downloading ? "正在下载…" : "下载语言包") { model.requestDownload() }
+                            .disabled(model.downloading)
+                    }
+                    Button { Task { await model.refreshLanguages() } } label: {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .disabled(model.checking || model.downloading)
+                    .help("重新检查语言包")
+                    .accessibilityLabel("重新检查语言包")
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("沉浸式翻译接口地址")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    HStack(spacing: 14) {
+                        Text(model.endpoint)
+                            .font(.system(.body, design: .monospaced))
+                            .textSelection(.enabled)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                        Spacer()
+                        Button(copiedEndpoint == model.endpoint ? "已复制" : "复制接口地址") {
+                            model.copy(model.endpoint)
+                            copiedEndpoint = model.endpoint
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .disabled(!model.serviceRunning)
+                    }
+                }
+                .padding(14)
+                .background(Color.secondary.opacity(0.06), in: RoundedRectangle(cornerRadius: 10))
+
+                HStack(spacing: 10) {
+                    Text("端口").foregroundStyle(.secondary)
+                    TextField("3210", text: $model.portText)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 80)
+                        .disabled(model.serviceRunning || model.serviceStarting)
+                        .accessibilityLabel("接口端口")
+                    Text("仅供本机使用 · 无需 API Key")
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    if model.requestCount > 0 {
+                        Text("已处理 \(model.translatedRows) 段文本")
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .font(.caption)
+            }
+            .padding(12)
+        }
+    }
+
+    private var setupSection: some View {
+        GroupBox {
+            VStack(alignment: .leading, spacing: 16) {
+                Label("配置沉浸式翻译", systemImage: "puzzlepiece.extension")
+                    .font(.title2.weight(.semibold))
+                setupStep(1, title: "开启自定义接口", detail: "打开浏览器扩展的「设置 → 开发者设置」，启用 Beta 特性。")
+                setupStep(2, title: "粘贴接口地址", detail: "进入「翻译服务」，选择「自定义接口」，填入上面的接口地址。")
+                setupStep(3, title: "测试并开始翻译", detail: "在扩展中测试服务，将翻译服务设为「自定义接口」、目标语言设为简体中文，再翻译英文网页。")
+                Link("查看沉浸式翻译官方配置说明", destination: URL(string: "https://immersivetranslate.com/zh-Hans/docs/services/custom/")!)
+                    .font(.callout)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(12)
+        }
+    }
+
+    private func setupStep(_ number: Int, title: String, detail: String) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            Text(String(number))
+                .font(.callout.weight(.semibold).monospacedDigit())
+                .frame(width: 26, height: 26)
+                .background(Color.accentColor.opacity(0.12), in: Circle())
+                .foregroundStyle(Color.accentColor)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title).font(.headline)
+                Text(detail).font(.callout).foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
     }
 }
